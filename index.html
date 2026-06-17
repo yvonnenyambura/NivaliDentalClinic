@@ -121,6 +121,37 @@
       background: #00dae4 !important;
     }
 
+    /* HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    right: 0;
+    width: 100%;
+    background: rgba(10, 22, 40, 0.98);
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    display: none; /* hidden by default */
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
     /* HERO */
     #home {
       min-height: 100vh;
@@ -1376,12 +1407,13 @@
       <div class="nav-logo-icon">🦷</div>
       <div class="nav-logo-text">Nivali<span>Dental Clinic</span></div>
     </a>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#doctors">Doctors</a></li>
-      <li><a href="#gallery">Facility</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#book" class="nav-cta">Book Appointment</a></li>
     </ul>
@@ -1862,6 +1894,15 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    function toggleMenu() {
+  document.querySelector('.nav-links').classList.toggle('active');
+}
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('active');
+  });
+});
   </script>
 </body>
 
